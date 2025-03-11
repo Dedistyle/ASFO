@@ -75,31 +75,49 @@
                 <td><input class="operator" type="button" value="÷" onclick="btmDivision()"/></td>
                 <td><input class="operator" type="button" value="=" onclick="btmEgal()"/></td>
             </tr>
+            <tr>
+                <td colspan="4">
+                    <input class="number" type="button" value="," onclick="btm(',')"/>
+                </td>
+            </tr>
         </table>
     </center>
 
     <script>
         function btm(val) {
+            // Si l'utilisateur clique sur une virgule, on la transforme en point
+            if (val === ',') {
+                val = '.';
+            }
             document.getElementById("calc-output").innerHTML += val;
         }
+
         function btmClean(){
             document.getElementById("calc-output").innerHTML = "";
         }
+
         function btmPlus() {
             document.getElementById("calc-output").innerHTML += "+";
         }
+
         function btmLess() {
             document.getElementById("calc-output").innerHTML += "-";
         }
+
         function btmMultiply() {
             document.getElementById("calc-output").innerHTML += "*";
         }
+
         function btmDivision() {
             document.getElementById("calc-output").innerHTML += "/";
         }
+
         function btmEgal() {
             try {
-                var egal = eval(document.getElementById('calc-output').innerHTML);
+                // Remplacer les virgules par des points pour effectuer les calculs
+                var calc = document.getElementById('calc-output').innerHTML;
+                calc = calc.replace(/,/g, '.');  // Remplacer toutes les virgules par des points
+                var egal = eval(calc);
                 document.getElementById('calc-output').innerHTML = egal;
             } catch {
                 document.getElementById('calc-output').innerHTML = "Erreur";
